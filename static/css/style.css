@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Poppins;
+}
+
+.bg-container {
+    background-image: url('https://d10j3mvrs1suex.cloudfront.net/s:bzglfiles/system/9c3eaca07c915a56026d8e2e404253bd02a69ed8/original/louis-reed-a-xbe4tye5c-unsplash.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.main-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    letter-spacing: 8px;
+}
+
+.create-txt {
+    text-align: center;
+    color: #fff;
+    font-size: 20 px;
+}
+
+/* Input form */
+.text1 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.rgstr-text a{
+    color: #fff500;
+}
+
+.text2 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.email, .password {
+    background-color: #fff;
+    opacity: 0.5; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    border-radius: 10px;
+}
+
+/* Login button */
+.login-btn {
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+    font-size: 16px; 
+    border-radius: 20px;
+    background-size: 100% auto;
+    padding: 0.6em 1.5em;
+}
+
+button:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    -webkit-animation: pulse 2s infinite;
+    animation: pulse512 1.5s infinite;
+   }
+   
+@keyframes pulse512 {
+    0% {
+     box-shadow: 0 0 0 0 #05bada66;
+    }
+   
+    70% {
+     box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
+    }
+   
+    100% {
+     box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
+    }
+}
+
+/* More buttons */
+.fb-btn {
+    border: none;
+    font-weight: 600;
+    color: #fff;
+    background-color: #1877F2;
+    font-size: 16px; 
+    border-radius: 20px;
+    background-size: 100% auto;
+    padding: 0.6em 1.5em;
+}
+
+.fb-btn i {
+    margin-right: 8px; 
+}
+
+.google-btn {
+    border: none;
+    font-weight: 600;
+    color: #535553;
+    background-color: #fffcfc;
+    font-size: 16px; 
+    border-radius: 20px;
+    background-size: 100% auto;
+    padding: 0.6em 1.5em;
+}
+
+.google-btn img {
+    margin-right: 10px;
+}
