@@ -1,116 +1,182 @@
 {% extends 'base.html' %}
 {% include 'header.html' %}
  
-{% block title %} Home {% endblock %}
+{% block title %} Ride4Cast - Admin {% endblock %}
   
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col md-12">
-            <div class="jumbotron p-3">
-                <h2>Manage <b>Employees </b>  <button type="button"  class="btn btn-success float-right"
-                data-toggle="modal" data-target="#mymodal">Add New Employees</button> </h2>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                 
-    {% for message in messages %}
-                <div class="alert alert-success alert-dismissable" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                {{message}}
-                </div>
-                {% endfor %}
-     
-                {% endif %}
-                {% endwith %}
-  
-                <table class="table table-hover table-striped">
+<main id="main" class="main">
+    <div class="row justify-content-center align-items-center">
+      <div class="pagetitle col-sm-6">
+          <h1>Welcome Admin!</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">Passengers' Demand Forecasting System</li>
+            </ol>
+          </nav>
+        </div><!-- End Page Title -->
+
+        <div class="date-container col-sm-6">
+          <div class="row">
+            <i class="date bi bi-calendar-fill col-sm-4 cal-icon"></i>
+            <h1 class="col-sm-8">Friday, 16 June</h1>
+          </div>       
+        </div>
+    </div>
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row table-title">
+            <div class="col-sm-6 pt-4">
+              <h3 class="d-flex align-items-center"><i class="emp-icon bi bi-person-square"></i>Employees</h3>
+            </div>
+            <div class="col-sm-6 text-end">
+              <button type="button" data-bs-toggle="modal" data-bs-target="#myAddEmp">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Add
+                </span>
+              </button>
+            </div>
+          </div>
+          
+          <table class="table table-dark table-striped table-responsive-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                   {% for row in employees %}
-                    <tr>
-                        <td>{{row.id}}</td>
-                        <td>{{row.name}}</td>
-                        <td>{{row.email}}</td>
-                        <td>{{row.phone}}</td>
-                        <td>
-                            <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
-                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.phone }}</td>
+                        <td>{{ employee.position }}</td>
+                        <td>                        
                         </td>
                     </tr>
-     <!-- Modal Edit Employee-->
-     <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+                {% endfor %}
+            </tbody>
+          </table> 
+        </div>
+
+        <div class="col-lg-6">
+          <div class="row table-title">
+            <div class="col-sm-6 pt-4">
+              <h3 class="d-flex align-items-center"><i class="emp-icon bi bi-bus-front"></i>Buses</h3>
+            </div>
+            <div class="col-sm-6 text-end">
+              <button type="button" data-bs-toggle="modal" data-bs-target="#myAddBus">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Add
+                </span>
+              </button>
+            </div>
+          </div>
+          <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Bus Number</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">Capacity</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bus in buses %}
+                    <tr>
+                        <td>{{ bus.bus_number }}</td>
+                        <td>{{ bus.route }}</td>
+                        <td>{{ bus.capacity }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="myAddEmp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-       <div class="modal-header"><h4 class="modal-title">Update Information</h4></div>
-        <div class="modal-body">
-        <form action="{{url_for('update')}}" method="POST">
-         <div class="form-group">
-          <label>Name:</label>
-          <input type="hidden"  name="id" value="{{row.id}}">
-          <input type="text" class="form-control" name="name" value="{{row.name}}">
-         </div>
-         <div class="form-group">
-          <label>Email:</label>
-          <input type="text" class="form-control" name="email" value="{{row.email}}">
-         </div>
-         <div class="form-group">
-          <label>Phone:</label>
-          <input type="text" class="form-control" name="phone" value="{{row.phone}}">
-         </div>
-         <div class="form-group">
-          <button class="btn btn-primary" type="submit">Update</button>
-         </div>
-        </form>
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Employee</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('insert_emp')}}" method="POST">
+              <div class="form-group">
+                <label>Name:</label>
+               <input type="text" class="form-control" name="name" required="1">
+              </div>
+              <div class="form-group">
+               <label>Email:</label>
+               <input type="email" class="form-control" name="email" required="1">
+              </div>
+              <div class="form-group">
+               <label>Phone:</label>
+               <input type="number" class="form-control" name="phone" required="1">
+              </div>
+              <div class="form-group">
+                <label>Position:</label>
+                <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" name="position" required="1">
+                    <option selected>Choose position</option>
+                    <option value="Driver">Driver</option>
+                    <option value="Conductor">Conductor</option>
+                  </select>
+                </div>
+               </div>
+              <div class="form-group text-end">
+                <button class="btn btn-primary" type="submit">Add Employee</button>
+              </div>
+             </form>
+          </div>
         </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>  
+    
+    <!-- Add Bus Modal -->
+    <div class="modal fade" id="myAddBus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Bus</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('insert_bus')}}" method="POST">
+              <div class="form-group">
+                <label>Bus Number:</label>
+                <input type="text" class="form-control" name="bus_number" required="1">
+              </div>
+              <div class="form-group">
+                <label>Route:</label>
+                <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" name="route" required="1">
+                    <option selected>Choose route</option>
+                    <option value="Tambo-Bayanihan">Tambo-Bayanihan</option>
+                  </select>
+                </div>
+               </div>
+              <div class="form-group">
+                <label>Capacity:</label>
+                <input type="number" class="form-control" name="capacity" required="1">
+              </div>
+              <div class="form-group text-end">
+                <button class="btn btn-primary" type="submit">Add Bus</button>
+              </div>
+             </form>
+          </div>
         </div>
       </div>
-      </div>
-     </div> 
-     {% endfor %}
-    </table>
-   </div>
-  
-  <!-- Modal Add Employee-->
-  <div id="mymodal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-     <div class="modal-content">
-    <div class="modal-header"><h4 class="modal-title">Add Employee</h4></div>
-    <div class="modal-body">
-     <form action="{{url_for('insert')}}" method="POST">
-      <div class="form-group">
-       <label>Name:</label>
-       <input type="text" class="form-control" name="name" required="1">
-      </div>
-      <div class="form-group">
-       <label>Email:</label>
-       <input type="email" class="form-control" name="email" required="1">
-      </div>
-      <div class="form-group">
-       <label>Phone:</label>
-       <input type="number" class="form-control" name="phone" required="1">
-      </div>
-      <div class="form-group">
-      <button class="btn btn-primary" type="submit">Add Employee</button>
-      </div>
-     </form>
     </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    </div>
-   </div>
-   </div>
-  </div>
-   
- </div>
- </div>
-</div>
+
+  </main>
 {% endblock %}
