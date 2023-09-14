@@ -4,7 +4,19 @@
 {% block title %} Ride4Cast - Admin {% endblock %}
   
 {% block body %}
-<main id="main" class="main">
+  <main id="main" class="main">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div id="flash-message" class="alert alert-info">
+          <ul class="list-unstyled">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+
     <div class="row justify-content-center align-items-center">
       <div class="pagetitle col-sm-6">
           <h1>Welcome Admin!</h1>
@@ -56,7 +68,11 @@
                         <td>{{ employee.email }}</td>
                         <td>{{ employee.phone }}</td>
                         <td>{{ employee.position }}</td>
-                        <td>                        
+                        <td>
+                          <a href="/update_emp/{{employee.id}}" class="editBtn actionBtn" data-bs-toggle="modal" data-bs-target="#myEditEmp{{employee.id}}">Edit      <svg class="svg" viewBox="0 0 512 512">
+                            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path></svg></a>
+                          <a href="/delete_emp/{{employee.id}}" class="delBtn actionBtn" onclick="return confirm('Are You Sure To Delete ?')">Delete      <svg class="svg" viewBox="0 0 512 512">
+                            <path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H230.9a23.7 23.7 0 0 0-21.4 13.3L200 32H80a48 48 0 0 0-48 48v32a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h256a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V80a48 48 0 0 0-48-48zm-82 432a16 16 0 0 1-16 16H182a16 16 0 0 1-16-16V128h192zm70-304H102a6 6 0 0 1-6-6V80a6 6 0 0 1 6-6h80.6l9.4-18.7A6 6 0 0 1 197.8 48h116.3a6 6 0 0 1 5.8 7.3L320.4 74H402a6 6 0 0 1 6 6v74a6 6 0 0 1-6 6z"></path></svg></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -92,7 +108,12 @@
                         <td>{{ bus.bus_number }}</td>
                         <td>{{ bus.route }}</td>
                         <td>{{ bus.capacity }}</td>
-                        <td></td>
+                        <td>
+                          <a href="/update_bus/{{bus.id}}" class="editBtn actionBtn" data-bs-toggle="modal" data-bs-target="#myEditBus{{bus.id}}">Edit      <svg class="svg" viewBox="0 0 512 512">
+                            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path></svg></a>
+                          <a href="/delete_bus/{{bus.id}}" class="delBtn actionBtn" onclick="return confirm('Are You Sure To Delete ?')">Delete      <svg class="svg" viewBox="0 0 512 512">
+                            <path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H230.9a23.7 23.7 0 0 0-21.4 13.3L200 32H80a48 48 0 0 0-48 48v32a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h256a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V80a48 48 0 0 0-48-48zm-82 432a16 16 0 0 1-16 16H182a16 16 0 0 1-16-16V128h192zm70-304H102a6 6 0 0 1-6-6V80a6 6 0 0 1 6-6h80.6l9.4-18.7A6 6 0 0 1 197.8 48h116.3a6 6 0 0 1 5.8 7.3L320.4 74H402a6 6 0 0 1 6 6v74a6 6 0 0 1-6 6z"></path></svg></a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -127,7 +148,7 @@
                 <label>Position:</label>
                 <div class="col-sm-10">
                   <select class="form-select" aria-label="Default select example" name="position" required="1">
-                    <option selected>Choose position</option>
+                    <option selected disabled>Choose position</option>
                     <option value="Driver">Driver</option>
                     <option value="Conductor">Conductor</option>
                   </select>
@@ -160,7 +181,7 @@
                 <label>Route:</label>
                 <div class="col-sm-10">
                   <select class="form-select" aria-label="Default select example" name="route" required="1">
-                    <option selected>Choose route</option>
+                    <option selected disabled>Choose route</option>
                     <option value="Tambo-Bayanihan">Tambo-Bayanihan</option>
                   </select>
                 </div>
@@ -177,6 +198,88 @@
         </div>
       </div>
     </div>
+
+    <!-- Edit Employee Modal -->
+    {% for employee in employees %}
+    <div class="modal fade" id="myEditEmp{{employee.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Employee Data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('update_emp')}}" method="POST">
+              <div class="form-group">
+                <input type="hidden" name="id" value="{{employee.id}}">
+                <label>Name:</label>
+               <input type="text" class="form-control" name="name" value="{{employee.name}}">
+              </div>
+              <div class="form-group">
+               <label>Email:</label>
+               <input type="email" class="form-control" name="email" value="{{employee.email}}">
+              </div>
+              <div class="form-group">
+               <label>Phone:</label>
+               <input type="number" class="form-control" name="phone" value="{{employee.phone}}">
+              </div>
+              <div class="form-group">
+                <label>Position:</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="position" aria-label="Default select example">
+                    <option disabled>Choose position</option>
+                    <option value="Driver" {% if employee.position == 'Driver' %}selected{% endif %}>Driver</option>
+                    <option value="Conductor" {% if employee.position == 'Conductor' %}selected{% endif %}>Conductor</option>
+                </select>
+                </div>
+               </div>
+              <div class="form-group text-end">
+                <button class="btn btn-primary" type="submit">Update Employee Data</button>
+              </div>
+             </form>
+          </div>
+        </div>
+      </div>
+    </div>  
+    {% endfor %}
+
+    <!-- Edit Bus Modal -->
+    {% for bus in buses %}
+    <div class="modal fade" id="myEditBus{{bus.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Bus Data</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('update_bus')}}" method="POST">
+              <div class="form-group">
+                <input type="hidden" name="id" value="{{bus.id}}">
+                <label>Bus Number:</label>
+                <input type="text" class="form-control" name="bus_number" value="{{bus.bus_number}}">
+              </div>
+              <div class="form-group">
+                <label>Route:</label>
+                <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" name="route">
+                    <option value="Tambo-Bayanihan" {% if bus.route == 'Tambo-Bayanihan' %}selected{% endif %}>Tambo-Bayanihan</option>
+                  </select>
+                </div>
+               </div>
+              <div class="form-group">
+                <label>Capacity:</label>
+                <input type="number" class="form-control" name="capacity" value="{{bus.capacity}}">
+              </div>
+              <div class="form-group text-end">
+                <button class="btn btn-primary" type="submit">Update Bus Data</button>
+              </div>
+             </form>
+          </div>
+        </div>
+      </div>
+    </div>  
+    {% endfor %}
 
   </main>
 {% endblock %}

@@ -54,6 +54,7 @@ body {
   }
   
   .header {
+    background-color: #221e22;
     transition: all 0.5s;
     z-index: 997;
     height: 60px;
@@ -227,3 +228,67 @@ button {
  button:hover {
   background-color: #eca72c;
  }
+
+ .editBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90px;
+  height: 35px;
+  border: none;
+  margin: 10px 0;
+  padding: 0px 20px;
+  background-color: rgb(255, 204, 0);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px rgb(213, 171, 1);
+  transition-duration: .3s;
+}
+
+.delBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 110px;
+  height: 35px;
+  border: none;
+  padding: 0px 20px;
+  background-color: rgb(255, 2, 2);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px rgb(204, 0, 0);
+  transition-duration: .3s;
+}
+
+.svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: white;
+  transition-duration: .3s;
+}
+
+.actionBtn:hover {
+  color: transparent;
+}
+
+.actionBtn:hover svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: .3s;
+}
+
+.actionBtn:active {
+  transform: translate(3px , 3px);
+  transition-duration: .3s;
+  box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}

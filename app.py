@@ -57,7 +57,7 @@ def insert_emp():
         db.session.add(my_data1)
         db.session.commit()
   
-        flash("Employee Inserted Successfully")
+        flash("Employee Inserted Successfully", "success")
         return redirect(url_for('Index'))
 
 @app.route('/insert_bus', methods = ['POST'])
@@ -76,26 +76,48 @@ def insert_bus():
 
 
 #update data
-@app.route('/update', methods = ['GET', 'POST'])
-def update():
+@app.route('/update_emp', methods = ['GET', 'POST'])
+def update_emp():
     if request.method == 'POST':
-        my_data = Employee.query.get(request.form.get('id'))
+        my_data1 = Employee.query.get(request.form.get('id'))
   
-        my_data.name = request.form['name']
-        my_data.email = request.form['email']
-        my_data.phone = request.form['phone']
+        my_data1.name = request.form['name']
+        my_data1.email = request.form['email']
+        my_data1.phone = request.form['phone']
+        my_data1.position = request.form['position']
   
         db.session.commit()
         flash("Employee Updated Successfully")
         return redirect(url_for('Index'))
+    
+@app.route('/update_bus', methods = ['GET', 'POST'])
+def update_bus():
+    if request.method == 'POST':
+        my_data2 = Bus.query.get(request.form.get('id'))
+  
+        my_data2.bus_number = request.form['bus_number']
+        my_data2.route = request.form['route']
+        my_data2.capacity = request.form['capacity']
+  
+        db.session.commit()
+        flash("Bus Updated Successfully")
+        return redirect(url_for('Index'))
   
 #delete data
-@app.route('/delete/<id>/', methods = ['GET', 'POST'])
-def delete(id):
-    my_data = Employee.query.get(id)
-    db.session.delete(my_data)
+@app.route('/delete_emp/<id>/', methods = ['GET', 'POST'])
+def delete_emp(id):
+    my_data1 = Employee.query.get(id)
+    db.session.delete(my_data1)
     db.session.commit()
     flash("Employee Deleted Successfully")
+    return redirect(url_for('Index'))
+
+@app.route('/delete_bus/<id>/', methods = ['GET', 'POST'])
+def delete_bus(id):
+    my_data2 = Bus.query.get(id)
+    db.session.delete(my_data2)
+    db.session.commit()
+    flash("Bus Deleted Successfully")
     return redirect(url_for('Index'))
   
 if __name__ == "__main__":
